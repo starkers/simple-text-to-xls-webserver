@@ -1,87 +1,34 @@
 package main
 
 import (
-	"embed"
-	"log"
+	"fmt"
+	"strings"
 
-	"github.com/wailsapp/wails/v2"
-	"github.com/wailsapp/wails/v2/pkg/logger"
-	"github.com/wailsapp/wails/v2/pkg/options"
-	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
-	"github.com/wailsapp/wails/v2/pkg/options/mac"
-	"github.com/wailsapp/wails/v2/pkg/options/windows"
+	g "github.com/AllenDang/giu"
 )
 
-//go:embed all:frontend/dist/spa
-var assets embed.FS
+var (
+	dropInFiles string
+)
 
-//go:embed build/appicon.png
-var icon []byte
+func loop() {
+	g.SingleWindow().Layout(
+		g.Label("Drop file to this window"),
+		g.InputTextMultiline(&dropInFiles).Size(g.Auto, g.Auto).Flags(g.InputTextFlagsReadOnly),
+	)
+}
+
+func onDrop(names []string) {
+	var sb strings.Builder
+	for _, n := range names {
+		sb.WriteString(fmt.Sprintf("%s\n", n))
+	}
+	dropInFiles = sb.String()
+	g.Update()
+}
 
 func main() {
-	// Create an instance of the app structure
-	app := NewApp()
-
-	// Create application with options
-	err := wails.Run(&options.App{
-		Title:             "convert txt thing",
-		Width:             1024,
-		Height:            768,
-		MinWidth:          1024,
-		MinHeight:         768,
-		MaxWidth:          1280,
-		MaxHeight:         800,
-		DisableResize:     false,
-		Fullscreen:        false,
-		Frameless:         false,
-		StartHidden:       false,
-		HideWindowOnClose: false,
-		BackgroundColour:  &options.RGBA{R: 255, G: 255, B: 255, A: 255},
-		AssetServer:       &assetserver.Options{
-			Assets: assets,
-		},
-		Menu:              nil,
-		Logger:            nil,
-		LogLevel:          logger.DEBUG,
-		OnStartup:         app.startup,
-		OnDomReady:        app.domReady,
-		OnBeforeClose:     app.beforeClose,
-		OnShutdown:        app.shutdown,
-		WindowStartState:  options.Normal,
-		Bind: []interface{}{
-			app,
-		},
-		// Windows platform specific options
-		Windows: &windows.Options{
-			WebviewIsTransparent: false,
-			WindowIsTranslucent:  false,
-			DisableWindowIcon:    false,
-			// DisableFramelessWindowDecorations: false,
-			WebviewUserDataPath: "",
-			ZoomFactor: 1.0,
-		},
-		// Mac platform specific options
-		Mac: &mac.Options{
-			TitleBar: &mac.TitleBar{
-				TitlebarAppearsTransparent: false,
-				HideTitle:                  false,
-				HideTitleBar:               false,
-				FullSizeContent:            false,
-				UseToolbar:                 false,
-				HideToolbarSeparator:       true,
-			},
-			Appearance:           mac.NSAppearanceNameDarkAqua,
-			WebviewIsTransparent: true,
-			WindowIsTranslucent:  true,
-			About: &mac.AboutInfo{
-				Title:   "convert txt thing",
-				Message: "",
-				Icon:    icon,
-			},
-		},
-	})
-
-	if err != nil {
-		log.Fatal(err)
-	}
+	wnd := g.NewMasterWindow("On Drop Demo", 600, 400, g.MasterWindowFlagsNotResizable)
+	wnd.SetDropCallback(onDrop)
+	wnd.Run(loop)
 }

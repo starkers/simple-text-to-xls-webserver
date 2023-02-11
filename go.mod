@@ -1,34 +1,17 @@
-module changeme
+module ptt
 
 go 1.18
 
-require github.com/wailsapp/wails/v2 v2.3.1
-
 require (
-	github.com/bep/debounce v1.2.1 // indirect
-	github.com/go-ole/go-ole v1.2.6 // indirect
-	github.com/google/uuid v1.1.2 // indirect
-	github.com/imdario/mergo v0.3.12 // indirect
-	github.com/jchv/go-winloader v0.0.0-20210711035445-715c2860da7e // indirect
-	github.com/labstack/echo/v4 v4.9.0 // indirect
-	github.com/labstack/gommon v0.3.1 // indirect
-	github.com/leaanthony/go-ansi-parser v1.0.1 // indirect
-	github.com/leaanthony/gosod v1.0.3 // indirect
-	github.com/leaanthony/slicer v1.5.0 // indirect
-	github.com/mattn/go-colorable v0.1.11 // indirect
-	github.com/mattn/go-isatty v0.0.14 // indirect
-	github.com/pkg/browser v0.0.0-20210706143420-7d21f8c997e2 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
-	github.com/samber/lo v1.27.1 // indirect
-	github.com/tkrajina/go-reflector v0.5.5 // indirect
-	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasttemplate v1.2.1 // indirect
-	github.com/wailsapp/mimetype v1.4.1 // indirect
-	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
-	golang.org/x/exp v0.0.0-20220303212507-bbda1eaf7a17 // indirect
-	golang.org/x/net v0.0.0-20220722155237-a158d28d115b // indirect
-	golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f // indirect
-	golang.org/x/text v0.3.7 // indirect
+	github.com/AllenDang/giu v0.6.2 // indirect
+	github.com/AllenDang/go-findfont v0.0.0-20200702051237-9f180485aeb8 // indirect
+	github.com/AllenDang/imgui-go v1.12.1-0.20220322114136-499bbf6a42ad // indirect
+	github.com/faiface/mainthread v0.0.0-20171120011319-8b78f0a41ae3 // indirect
+	github.com/go-gl/gl v0.0.0-20211210172815-726fda9656d6 // indirect
+	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20220320163800-277f93cfa958 // indirect
+	github.com/pkg/browser v0.0.0-20210911075715-681adbf594b8 // indirect
+	github.com/sahilm/fuzzy v0.1.0 // indirect
+	golang.org/x/image v0.0.0-20220302094943-723b81ca9867 // indirect
+	golang.org/x/sys v0.0.0-20220315194320-039c03cc5b86 // indirect
+	gopkg.in/eapache/queue.v1 v1.1.0 // indirect
 )
-
-// replace github.com/wailsapp/wails/v2 v2.3.1 => /home/starkers/.asdf/installs/golang/1.18.7/packages/pkg/mod
