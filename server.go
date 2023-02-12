@@ -10,11 +10,14 @@ import (
 	"go.uber.org/zap"
 )
 
+var downloadDir = "/tmp/ptt-downloads"
+var uploadDir = "/tmp/ptt-uploads"
+
 func main() {
 	e := echo.New()
 
 	listen := "8080"
-	downloadDir := "/tmp/ptt-downloads"
+	// downloadDir := "/tmp/ptt-downloads"
 	zapLogger, _ := zap.NewProduction()
 	log := zap.SugaredLogger(*zapLogger.Sugar())
 
@@ -27,7 +30,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	e.Static(downloadDir, "download")
+	e.Static("/downloads", downloadDir)
 	e.Static("/", "public")
 	e.POST("/upload", upload)
 

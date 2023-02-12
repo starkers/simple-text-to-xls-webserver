@@ -6,7 +6,7 @@ import (
 	"github.com/xuri/excelize/v2"
 )
 
-func generateXls(input []Line, outputName string) error {
+func renderXls(input []Line, outputFile string) error {
 
 	f := excelize.NewFile()
 	defer func() {
@@ -27,7 +27,6 @@ func generateXls(input []Line, outputName string) error {
 		f.SetCellValue(sheetName, b, data.Time)
 		f.SetCellValue(sheetName, c, data.Text)
 	}
-	err := f.SaveAs("Book1.xlsx")
+	err := f.SaveAs(outputFile)
 	return err
-
 }
