@@ -81,9 +81,8 @@ func upload(c echo.Context) error {
 
 	downloadLink := fmt.Sprintf("<a href=\"/downloads/%s.xlsx\">download the results here</a>", hash)
 
-	msg := fmt.Sprintf("<p>File %s uploaded and parsed OK successfully (%s)</p><br>%s<br>",
+	msg := fmt.Sprintf("<p>File \"<b>%s</b>\" uploaded and converted OK</p><br>%s<br>",
 		file.Filename,
-		uploadedFileName,
 		downloadLink,
 	)
 	return c.HTML(http.StatusOK, fmt.Sprintf("%s%s", msg, htmlFooter))

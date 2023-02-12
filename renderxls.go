@@ -15,6 +15,7 @@ func renderXls(input []Line, outputFile string) error {
 		}
 	}()
 	sheetName := "Sheet1"
+	f.SetColWidth(sheetName, "A", "A", 20)
 	f.SetCellValue(sheetName, "A1", "Person")
 	f.SetCellValue(sheetName, "B1", "Time")
 	f.SetCellValue(sheetName, "C1", "Text")
