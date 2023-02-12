@@ -14,8 +14,23 @@ func renderXls(input []Line, outputFile string) error {
 			fmt.Println(err)
 		}
 	}()
+
+	wrapCellStyle, _ := f.NewStyle(&excelize.Style{
+		Alignment: &excelize.Alignment{
+			//Horizontal:      "center",
+			//Indent:          1,
+			//JustifyLastLine: true,
+			//ReadingOrder:    0,
+			//RelativeIndent:  1,
+			//ShrinkToFit:     true,
+			//TextRotation:    45,
+			//Vertical:        "",
+			WrapText: true,
+		},
+	})
 	sheetName := "Sheet1"
 	f.SetColWidth(sheetName, "A", "A", 20)
+	f.SetColWidth(sheetName, "C", "C", 500)
 	f.SetCellValue(sheetName, "A1", "Person")
 	f.SetCellValue(sheetName, "B1", "Time")
 	f.SetCellValue(sheetName, "C1", "Text")
@@ -28,6 +43,7 @@ func renderXls(input []Line, outputFile string) error {
 		f.SetCellValue(sheetName, a, data.Person)
 		f.SetCellValue(sheetName, b, data.Time)
 		f.SetCellValue(sheetName, c, data.Text)
+		f.SetCellStyle(sheetName, c, c, wrapCellStyle)
 	}
 
 	names := getPersonNames(input)
